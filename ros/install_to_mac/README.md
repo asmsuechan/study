@@ -41,7 +41,7 @@ http://stackoverflow.com/questions/32425717/is-your-docker-daemon-up-and-running
  >     osrf/ros:indigo-desktop-full \
  >     rosrun rviz rviz
  rviz: cannot connect to X server unix/private/tmp/com.apple.launchd.IUheFkztTD/org.macosforge.xquartz:0
- ``
+```
 
 XQuartzがエラー吐いてますね。あとrviz立ち上げるだけなのですがここが一番根が深そうです。
 
