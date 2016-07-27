@@ -82,7 +82,7 @@ brew install vagrant
 # rbenvを使ってrubyのインストール
 rbenv install 2.2.3
 rbenv global 2.2.3
-rbnev rehash
+rbenv rehash
 
 gem install rails
 
