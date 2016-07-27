@@ -48,6 +48,9 @@ elif [ ! -f ~/.zshrc ];then
   curl https://raw.githubusercontent.com/asmsuechan/dotfiles/master/.zshrc > ~/.zshrc
 fi
 
+# ログインシェルをzshに変更
+sudo dscl . -create /Users/$USER UserShell `which zsh`
+
 # vimのインストール
 if [ -f /usr/bin/vim ];then
   echo "cool! vim is waiting you!"
