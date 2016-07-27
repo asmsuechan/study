@@ -1,13 +1,14 @@
-# brewとbrew caskとgitのインストール
+# brewのインストール
 # brewが存在しない場合のみインストール
-# brewがインストールされていてcaskがいない場合はあとで書く
 if [[ `type brew` =~ (?!found)$ ]]; then
-  echo "starting install brew & brew cask"
+  echo "starting install brew"
   sudo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install git
-  brew tap caskroom/cask
   echo "install finished!"
 fi
+
+xcode-select --install
+brew install git
+brew tap caskroom/cask
 
 # brew caskからアプリケーションのインストール
 # cask外からインストールして既存の場合は上書き禁止にしたい
