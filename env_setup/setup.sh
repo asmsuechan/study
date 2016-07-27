@@ -2,10 +2,11 @@
 # brewが存在しない場合のみインストール
 if [[ `type brew` =~ (?!found)$ ]]; then
   echo "starting install brew"
-  sudo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   echo "install finished!"
 fi
 
+# xcodeは手でインストールする必要がある・・・？
 xcode-select --install
 brew install git
 brew tap caskroom/cask
@@ -13,23 +14,14 @@ brew tap caskroom/cask
 # brew caskからアプリケーションのインストール
 # cask外からインストールして既存の場合は上書き禁止にしたい
 
-BREW_CASK_LIST=`brew cask list`
+brew cask install flux
+brew cask install iterm2
+brew cask install vagrant
+brew cask install slack
 
-if [[ $BREW_CASK_LIST =~ (?!flux) ]];then
-  echo "starting install flux..."
-  brew cask install flux
-  echo "install finished!"
-elif [[ $BREW_CASK_LIST =~ (?!iterm2) ]];then
-  echo "starting install iterm2"
-  brew cask install iterm2
-  echo "install finished!"
-elif [[ -f /Application/Google\ Chrome.app && $BREW_CASK_LIST =~ (?!google-chrome) ]];then
+if [[ -f /Application/Google\ Chrome.app ]];then
   echo "starting install google-chrome"
   brew cask install google-chrome
-  echo "install finished!"
-elif [[ $BREW_CASK_LIST =~ (?!virtualbox) ]];then
-  echo "starting install virtualbox"
-  brew cask install virtualbox
   echo "install finished!"
 fi
 
@@ -38,6 +30,7 @@ echo "installing zsh unless exist..."
 if [[ $SHELL =~ (?!zsh)$ ]]; then
   brew install --without-etcdir zsh
   brew install zsh-completions
+  git clone https://github.com/b4b4r07/zplug ~/.zplug
 fi
 
 # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
@@ -80,14 +73,13 @@ brew install tree
 brew install docker
 brew install docker-machine
 brew install nginx
-brew install vagrant
 
 # rbenvを使ってrubyのインストール
 rbenv install 2.2.3
 rbenv global 2.2.3
 rbenv rehash
 
-gem install rails
+sudo gem install rails
 
 # 最後にインストールチェック
 # ruby rails virtualbox iterm2 zsh
