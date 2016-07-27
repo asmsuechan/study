@@ -48,6 +48,9 @@ elif [ ! -f ~/.zshrc ];then
   curl https://raw.githubusercontent.com/asmsuechan/dotfiles/master/.zshrc > ~/.zshrc
 fi
 
+echo 'autoload -Uz compinit
+compinit' >> ~/.zshenv
+
 # ログインシェルをzshに変更
 sudo dscl . -create /Users/$USER UserShell `which zsh`
 
