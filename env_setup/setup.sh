@@ -1,9 +1,10 @@
-# brewとbrew caskのインストール
+# brewとbrew caskとgitのインストール
 # brewが存在しない場合のみインストール
 # brewがインストールされていてcaskがいない場合はあとで書く
 if [[ `type brew` =~ (?!found)$ ]]; then
   echo "starting install brew & brew cask"
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  sudo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install git
   brew tap caskroom/cask
   echo "install finished!"
 fi
@@ -51,6 +52,11 @@ if [ -f /usr/bin/vim ];then
   echo "cool! vim is waiting you!"
 else
   echo "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
+fi
+
+if [ -f ~/.vim/bundle ];then
+  mkdir -p ~/.vim/bundle
+  git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 fi
 
 # ~/.vimrcの設置
