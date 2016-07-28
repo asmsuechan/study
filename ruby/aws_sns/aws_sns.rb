@@ -27,6 +27,14 @@ endpoints[:endpoints].each do |endpoint|
   )
 end
 
+ep_arn = client.create_platform_endpoint({
+  platform_application_arn: YAML.load_file('./aws.yml')['development']['platform_application_arn'],
+  token: YAML.load_file('./aws.yml')['development']['token']
+})
+
+# token(registration_id)からsns_endpoint_arnを取得する
+puts ep_arn[:endpoint_arn]
+
 # IAMロールのユーザーにSNSの権限追加しないとUnauthorizeエラー出ます
 #
 # 参考

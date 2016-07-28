@@ -4,3 +4,4 @@ development:
     region: "xxxxxxxxxx"
     platform_application_arn: "xxxxxxxxxxxxxxxxx"
     platform_credential: "xxxxxxxxxxxx"
+    token: "xxxxxxxxxxxxxxxxxx"
