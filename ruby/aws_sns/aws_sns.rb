@@ -7,7 +7,7 @@ sns = AWS::SNS.new
 client = sns.client
 
 endpoints = client.list_endpoints_by_platform_application(
-  platform_application_arn: 'arn:aws:sns:us-west-2:xxxxxxxxxxxxxxxx:app/GCM/push_notification_test'
+  platform_application_arn: YAML.load_file('./aws.yml')['development']['platform_application_arn']
 )
 endpoints[:endpoints].each do |endpoint|
   client.publish(
