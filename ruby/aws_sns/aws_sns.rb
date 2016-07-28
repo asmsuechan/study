@@ -6,6 +6,17 @@ AWS.config(YAML.load_file('./aws.yml')['development'])
 sns = AWS::SNS.new
 client = sns.client
 
+# platform_applicationを新規作成
+client.create_platform_application({
+  name: "cw_user_device_id_1",
+  platform: "GCM",
+  attributes: {
+    'PlatformPrincipal' => '',
+    'PlatformCredential' => YAML.load_file('./aws.yml')['development']['platform_credential']
+  }
+})
+
+# あるplatform_application_arnのendpointを全て取得する
 endpoints = client.list_endpoints_by_platform_application(
   platform_application_arn: YAML.load_file('./aws.yml')['development']['platform_application_arn']
 )
