@@ -2,3 +2,4 @@ development:
     access_key_id: "xxxxxxxxxxxxxxx"
     secret_access_key: "xxxxxxxxxxxxx"
     region: "xxxxxxxxxx"
+    platform_application_arn: "xxxxxxxxxxxxxxxxx"
