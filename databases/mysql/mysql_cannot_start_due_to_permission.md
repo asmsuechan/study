@@ -39,7 +39,7 @@ $ kill `ps -ef | grep mysql | awk '{print $2;}'`
 $ mysql.sersver start
 ```
 
-### ログを見る
+### ログを見よう
 ```
 ls -la /usr/local/var/mysql
 ```
@@ -59,6 +59,13 @@ $ cat /usr/local/var/mysql/*.local.err
 2016-07-29 10:10:42 974 [ERROR] Fatal error: Can't open and lock privilege tables: Can't find file: './mysql/user.frm' (errno: 13 - Permission denied)
 160729 10:10:42 mysqld_safe mysqld from pid file /usr/local/var/mysql/ats.local.pid ended
 ats:mysql
+```
+
+ログの更新をリアルタイムで覗くには別タブ開いてtailfを実行してmysqlを起動します。
+```
+$ tail -f /usr/local/var/mysql/*.local.err
+# 別タブ
+$ mysql.server start
 ```
 
 ## 参考
