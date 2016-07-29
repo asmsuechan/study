@@ -1,4 +1,4 @@
-# jsのテストについて
+# [jsのテストについて]
 自分が作っている[ライブラリ](https://github.com/asmsuechan/jquery_push_notification)にもテストはあるのですがjsのテストは初めてだったのでメモします。
 
 ## karma+jasmine
