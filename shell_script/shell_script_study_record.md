@@ -57,6 +57,19 @@ echo `ls`
 
 testコマンドは評価値に応じて0か1を返すコマンドです。
 
+### 正規表現で切り取る
+sedコマンドです。
+```
+# すべての文字列'hoge'を削除する
+sed -e 's/hoge//g'
+
+# 先頭に文字列'fuga'を追加する
+sed -e 's/^/fuga/g'
+
+# 最初の1行目を削除する
+sed -e '1,1d'
+```
+
 ## 参考
 ありがてえありがてえ
 http://qiita.com/toshihirock/items/461da0f60f975f6acb10
