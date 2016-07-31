@@ -1,7 +1,7 @@
 このリポジトリはasmsuechanの勉強記録です。  
 This repository is a study-record for asmsuechan.
 
-~わざわざブログ開くのめんどくさいので~ ほとんどブログ代わりに書いています。ブログは[こちら](http://hyottokoaloha.hatenablog.com/)
+~~わざわざブログ開くのめんどくさいので~~ ほとんどブログ代わりに書いています。ブログは[こちら](http://hyottokoaloha.hatenablog.com/)
 
 ## 構成
 * [AWSで2段階認証をする](https://github.com/asmsuechan/study/blob/master//aws/adds_mfa_to_iam_role_user.md)
