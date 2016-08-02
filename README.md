@@ -9,3 +9,4 @@ This repository is a study-record for asmsuechan.
 * [jsのテストについて](https://github.com/asmsuechan/study/blob/master//js/js_spec/README.md)
 * [MacにROSをインストール](https://github.com/asmsuechan/study/blob/master//ros/install_to_mac.md)
 * [シェルスクリプト勉強記録](https://github.com/asmsuechan/study/blob/master//shell_script/shell_script_study_record.md)
+* [PokémonGOの解析](https://github.com/asmsuechan/study/blob/master//analytics/pokemon_go_analytics.md)
