@@ -20,11 +20,29 @@ client.create_platform_application({
 endpoints = client.list_endpoints_by_platform_application(
   platform_application_arn: YAML.load_file('./aws.yml')['development']['platform_application_arn']
 )
+
+# データを作成しているがうまく動かない
+data = { data: {
+  title: "asdf",
+  text: "hogehoge", 
+  post: {
+    id: 1, 
+    title: "fuga"
+  }
+}}.to_json.gsub('"', "\\\"")
+message = <<-EOD
+{"GCM": "#{data}"}
+EOD
 endpoints[:endpoints].each do |endpoint|
-  client.publish(
-    target_arn: endpoint[:endpoint_arn],
-    message: 'push_notification'
-  )
+  # disableのendpointがあるとエラーを吐くため
+  if endpoint[:attributes]["Enabled"] == "true"
+    puts endpoint
+    resp = client.publish(
+      target_arn: endpoint[:endpoint_arn],
+      message: message,
+      message_structure: "json"
+    )
+  end
 end
 
 ep_arn = client.create_platform_endpoint({
