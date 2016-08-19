@@ -30,3 +30,8 @@ thenの終わりにセミコロンがあるとエラーが出ます。
 
 #### waitUntilメソッド
 このメソッド内の処理が終わるまでサービスワーカーはインストールされません。
+
+#### Promise参考
+[JavaScript Promiseの本](http://azu.github.io/promises-book/)
+[JavaScript プログラミング講座 Promiseについて](http://hakuhin.jp/js/promise.html)
+[JS.next Promiseについて](http://js-next.hatenablog.com/entry/2013/11/28/093230)
