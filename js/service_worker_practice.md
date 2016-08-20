@@ -3,7 +3,7 @@
 ServiceWorkerはブラウザのバックグラウンドに常駐するプログラムのようなものです。オフラインでも動作するうえにページを開いていない状態でもユーザーへアクションを起こすことができます。
 
 ↓開発ツールから見えるServiceWorker
-![開発ツール](https://github.com/asmsuechan/study/tree/master/assets/sw_fb.png "Chrome開発ツールのApplication")
+![開発ツール](https://github.com/asmsuechan/study/raw/master/assets/sw_fb.png "Chrome開発ツールのApplication")
 
 また、ServiceWorkerはほとんど未来の技術と思われるほど新しい技術なのでだいたいのドキュメントには
 
