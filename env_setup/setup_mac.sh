@@ -52,11 +52,15 @@ fi
 
 # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
 echo "putting zsh config files unless exist..."
-if [ ! -f ~/.zprofile ];then
-  curl https://raw.githubusercontent.com/asmsuechan/dotfiles/master/.zprofile > ~/.zprofile
-elif [ ! -f ~/.zshrc ];then
-  curl https://raw.githubusercontent.com/asmsuechan/dotfiles/master/.zshrc > ~/.zshrc
+if [ ! -f ~/dotfiles ];then
+  git clone https://github.com/asmsuechan/dotfiles.git ~/dotfiles
+else
+  cd ~/dotfiles && git pull
 fi
+
+ln -s dotfiles/.zshrc ~/.zshrc
+ln -s dotfiles/.zprofile ~/.zprofile
+echo "zsh config finished"
 
 echo 'autoload -Uz compinit' >> ~/.zshenv
 
@@ -73,9 +77,7 @@ if [ -f ~/.vim/bundle ];then
 fi
 
 # ~/.vimrcの設置
-if [ ! -f ~/.vimrc ];then
-  curl https://raw.githubusercontent.com/asmsuechan/dotfiles/master/.vimrc > ~/.vimrc
-fi
+ln -s dotfiles/.vimrc ~/.vimrc
 
 # 便利ツール達のインストール
 # elcapitanにmysql5.7インストールすると「「「ヤバい」」」が構わず5.7をインストールする
