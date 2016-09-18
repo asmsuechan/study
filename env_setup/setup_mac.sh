@@ -34,7 +34,7 @@ fi
 # https://hnakamur.github.io/blog/2015/04/06/install-apps-without-homebrew-cask/
 if [[ -f /Application/Boostnote.app ]];then
   echo "starting install Boostnote"
-  wget https://github.com/BoostIO/boost-releases/releases/download/v0.6.5/Boostnote-mac.dmg
+  curl -LO https://github.com/BoostIO/boost-releases/releases/download/v0.6.5/Boostnote-mac.dmg
   mount_dir=`hdiutil attach $dmg_file | awk -F '\t' 'END{print $NF}'`
   cp $mount_dir/Boostnote.app /Application
   hdiutil detach "$mount_dir"
@@ -89,6 +89,7 @@ brew install docker
 brew install docker-machine
 brew install dinghy
 brew install nginx
+brew install wget
 
 # rbenvを使ってrubyのインストール
 rbenv install 2.3.1
