@@ -10,7 +10,7 @@ function install_by_brew () {
   # 便利ツール達のインストール
   # elcapitanにmysql5.7インストールすると「「「ヤバい」」」が構わず5.7をインストールする
   brew install tig
-  #brew install mysql
+  brew install mysql
   brew install tree
   brew install docker
   brew install docker-machine
@@ -55,8 +55,8 @@ function setup_zsh_vim () {
     cd ~/dotfiles && git pull
   fi
   
-  #ln -s dotfiles/.zshrc ~/.zshrc
-  #ln -s dotfiles/.zprofile ~/.zprofile
+  ln -s dotfiles/.zshrc ~/.zshrc
+  ln -s dotfiles/.zprofile ~/.zprofile
   echo "zsh config finished"
   
   echo 'autoload -Uz compinit' >> ~/.zshenv
@@ -74,7 +74,7 @@ function setup_zsh_vim () {
   fi
   
   # ~/.vimrcの設置
-  #ln -s dotfiles/.vimrc ~/.vimrc
+  ln -s dotfiles/.vimrc ~/.vimrc
 }
 
 function install_ruby_and_gems () {
