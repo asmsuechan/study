@@ -1,31 +1,101 @@
+# これはmacの初回セットアップ用スクリプトです。
+
+function install_by_brew () {
+  # xcodeは手でインストールする必要がある・・・？
+  xcode-select --install
+  brew install git
+  brew tap caskroom/cask
+  brew tap codekitchen/dinghy
+
+  # 便利ツール達のインストール
+  # elcapitanにmysql5.7インストールすると「「「ヤバい」」」が構わず5.7をインストールする
+  brew install tig
+  #brew install mysql
+  brew install tree
+  brew install docker
+  brew install docker-machine
+  brew install dinghy
+  brew install nginx
+  brew install wget
+}
+
+function install_by_brew_cask () {
+  # brew caskからアプリケーションのインストール
+  # cask外からインストールして既存の場合は上書き禁止にしたい
+  
+  brew cask install flux
+  brew cask install iterm2
+  #brew cask install vagrant
+  brew cask install slack
+  brew cask install skype
+  #brew cask install wireshark
+  brew cask install evernote
+  
+  if [[ -f /Application/Google\ Chrome.app ]];then
+    echo "starting install google-chrome"
+    brew cask install google-chrome
+    echo "install finished!"
+  fi
+}
+
+function setup_zsh_vim () {
+  # zshのインストール、設定
+  echo "installing zsh unless exist..."
+  if [[ $SHELL =~ (?!zsh)$ ]]; then
+    brew install --without-etcdir zsh
+    brew install zsh-completions
+    git clone https://github.com/b4b4r07/zplug ~/.zplug
+  fi
+  
+  # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
+  echo "putting zsh config files unless exist..."
+  if [ ! -f ~/dotfiles ];then
+    git clone https://github.com/asmsuechan/dotfiles.git ~/dotfiles
+  else
+    cd ~/dotfiles && git pull
+  fi
+  
+  #ln -s dotfiles/.zshrc ~/.zshrc
+  #ln -s dotfiles/.zprofile ~/.zprofile
+  echo "zsh config finished"
+  
+  echo 'autoload -Uz compinit' >> ~/.zshenv
+  
+  # vimのインストール
+  if [ -f /usr/bin/vim ];then
+    echo "cool! vim is waiting you!"
+  else
+    echo "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
+  fi
+  
+  if [ -f ~/.vim/bundle ];then
+    mkdir -p ~/.vim/bundle
+    git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+  fi
+  
+  # ~/.vimrcの設置
+  #ln -s dotfiles/.vimrc ~/.vimrc
+}
+
+function install_ruby_and_gems () {
+  brew install rbenv
+  # rbenvを使ってrubyのインストール
+  if echo `rbenv versions` | grep $1 ;then
+    echo "ruby is already installed"
+  else
+    rbenv install $1
+    rbenv global $1
+    rbenv rehash
+  fi
+  
+  gem install rails
+}
+
 # brewのインストール
 # brewが存在しない場合のみインストール
 if [[ `type brew` =~ (?!found)$ ]]; then
   echo "starting install brew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  echo "install finished!"
-fi
-
-# xcodeは手でインストールする必要がある・・・？
-xcode-select --install
-brew install git
-brew tap caskroom/cask
-brew tap codekitchen/dinghy
-
-# brew caskからアプリケーションのインストール
-# cask外からインストールして既存の場合は上書き禁止にしたい
-
-brew cask install flux
-brew cask install iterm2
-brew cask install vagrant
-brew cask install slack
-brew cask install skype
-brew cask install wireshark
-brew cask install evernote
-
-if [[ -f /Application/Google\ Chrome.app ]];then
-  echo "starting install google-chrome"
-  brew cask install google-chrome
   echo "install finished!"
 fi
 
@@ -42,61 +112,12 @@ if [[ -f /Application/Boostnote.app ]];then
   echo "install finished"
 fi
 
-# zshのインストール、設定
-echo "installing zsh unless exist..."
-if [[ $SHELL =~ (?!zsh)$ ]]; then
-  brew install --without-etcdir zsh
-  brew install zsh-completions
-  git clone https://github.com/b4b4r07/zplug ~/.zplug
-fi
+install_by_brew &
+install_by_brew_cask &
+setup_zsh_vim &
+install_ruby_and_gems 2.3.1
 
-# 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
-echo "putting zsh config files unless exist..."
-if [ ! -f ~/dotfiles ];then
-  git clone https://github.com/asmsuechan/dotfiles.git ~/dotfiles
-else
-  cd ~/dotfiles && git pull
-fi
-
-ln -s dotfiles/.zshrc ~/.zshrc
-ln -s dotfiles/.zprofile ~/.zprofile
-echo "zsh config finished"
-
-echo 'autoload -Uz compinit' >> ~/.zshenv
-
-# vimのインストール
-if [ -f /usr/bin/vim ];then
-  echo "cool! vim is waiting you!"
-else
-  echo "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
-fi
-
-if [ -f ~/.vim/bundle ];then
-  mkdir -p ~/.vim/bundle
-  git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-fi
-
-# ~/.vimrcの設置
-ln -s dotfiles/.vimrc ~/.vimrc
-
-# 便利ツール達のインストール
-# elcapitanにmysql5.7インストールすると「「「ヤバい」」」が構わず5.7をインストールする
-brew install tig
-brew install rbenv
-brew install mysql
-brew install tree
-brew install docker
-brew install docker-machine
-brew install dinghy
-brew install nginx
-brew install wget
-
-# rbenvを使ってrubyのインストール
-rbenv install 2.3.1
-rbenv global 2.3.1
-rbenv rehash
-
-gem install rails
+wait
 
 # 最後にインストールチェック
 # ruby rails virtualbox iterm2 zsh
