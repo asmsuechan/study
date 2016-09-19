@@ -13,7 +13,7 @@ function install_by_brew () {
   brew install mysql
   brew install tree
   brew install docker
-  brew install docker-machine
+  brew install docker-compose
   brew install dinghy
   brew install nginx
   brew install wget
@@ -22,7 +22,7 @@ function install_by_brew () {
 function install_by_brew_cask () {
   # brew caskからアプリケーションのインストール
   # cask外からインストールして既存の場合は上書き禁止にしたい
-  
+  brew cask update 
   brew cask install flux
   brew cask install iterm2
   #brew cask install vagrant
@@ -77,7 +77,7 @@ function setup_zsh_vim () {
   ln -s dotfiles/.vimrc ~/.vimrc
 }
 
-function install_ruby_and_gems () {
+function install_ruby_and_rails () {
   brew install rbenv
   # rbenvを使ってrubyのインストール
   if echo `rbenv versions` | grep $1 ;then
@@ -115,7 +115,7 @@ fi
 install_by_brew &
 install_by_brew_cask &
 setup_zsh_vim &
-install_ruby_and_gems 2.3.1
+install_ruby_and_rails 2.3.1
 
 wait
 
