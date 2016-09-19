@@ -33,21 +33,21 @@ function install_by_brew_cask () {
   brew cask install evernote
 
   if [[ -f /Application/Google\ Chrome.app ]];then
-    echo "starting install google-chrome"
+    echo_blue "starting install google-chrome"
     brew cask install google-chrome
-    echo "install finished!"
+    echo_blue "install finished!"
   fi
 }
 
 function setup_zsh_vim () {
   # zshのインストール、設定
-  echo "installing zsh unless exist..."
+  echo_blue "installing zsh unless exist..."
   if [[ "$SHELL" =~ "zsh" ]]; then
     git clone https://github.com/b4b4r07/zplug ~/.zplug
   fi
 
   # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
-  echo "putting zsh config files unless exist..."
+  echo_blue "putting zsh config files unless exist..."
   if [ -f ~/dotfiles ];then
     git clone https://github.com/asmsuechan/dotfiles.git ~/dotfiles
   else
@@ -58,15 +58,15 @@ function setup_zsh_vim () {
   ln -s ~/dotfiles/.zshrc ~/.zshrc
   unlink ~/.zprofile
   ln -s ~/dotfiles/.zprofile ~/.zprofile
-  echo "zsh config finished"
+  echo_blue "zsh config finished"
 
   echo 'autoload -Uz compinit' >> ~/.zshenv
 
   # vimのインストール
   if [ -f /usr/bin/vim ];then
-    echo "cool! vim is waiting you!"
+    echo_blue "cool! vim is waiting you!"
   else
-    echo "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
+    echo_blue "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
   fi
 
   if [ -f ~/.vim/bundle ];then
@@ -82,7 +82,7 @@ function setup_zsh_vim () {
 function install_ruby_and_rails () {
   # rbenvを使ってrubyのインストール
   if rbenv versions | grep $1;then
-    echo "ruby is already installed"
+    echo_blue "ruby is already installed"
   else
     rbenv install $1
     rbenv global $1
@@ -99,25 +99,29 @@ function initialize_instlation () {
   brew install zsh-completions
 }
 
+function echo_blue {
+  echo "\033[34m$1\033[m"
+}
+
 # brewのインストール
 # brewが存在しない場合のみインストール
 if [[ `type brew` =~ (?!found)$ ]]; then
-  echo "starting install brew"
+  echo_blue "starting install brew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  echo "install finished!"
+  echo_blue "install finished!"
 fi
 
 # Boostnoteのインストール。.dmgをマウントしたらBoostnote.appがいる
 # ここ参照
 # https://hnakamur.github.io/blog/2015/04/06/install-apps-without-homebrew-cask/
 if [[ -f /Application/Boostnote.app ]];then
-  echo "starting install Boostnote"
+  echo_blue "starting install Boostnote"
   curl -LO https://github.com/BoostIO/boost-releases/releases/download/v0.6.5/Boostnote-mac.dmg
   mount_dir=`hdiutil attach $dmg_file | awk -F '\t' 'END{print $NF}'`
   cp $mount_dir/Boostnote.app /Application
   hdiutil detach "$mount_dir"
   rm $dmg_file
-  echo "install finished"
+  echo_blue "install finished"
 fi
 
 initialize_instlation
