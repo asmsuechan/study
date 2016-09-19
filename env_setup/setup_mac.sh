@@ -55,7 +55,9 @@ function setup_zsh_vim () {
     cd ~/dotfiles && git pull
   fi
 
+  unlink ~/.zshrc
   ln -s ~/dotfiles/.zshrc ~/.zshrc
+  unlink ~/.zprofile
   ln -s ~/dotfiles/.zprofile ~/.zprofile
   echo "zsh config finished"
 
@@ -74,6 +76,7 @@ function setup_zsh_vim () {
   fi
 
   # ~/.vimrcの設置
+  unlink ~/.vimrc
   ln -s ~/dotfiles/.vimrc ~/.vimrc
 }
 
