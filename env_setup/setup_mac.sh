@@ -30,7 +30,7 @@ function install_by_brew_cask () {
   brew cask install skype
   #brew cask install wireshark
   brew cask install evernote
-  
+
   if [[ -f /Application/Google\ Chrome.app ]];then
     echo "starting install google-chrome"
     brew cask install google-chrome
@@ -46,7 +46,7 @@ function setup_zsh_vim () {
     brew install zsh-completions
     git clone https://github.com/b4b4r07/zplug ~/.zplug
   fi
-  
+
   # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
   echo "putting zsh config files unless exist..."
   if [ ! -f ~/dotfiles ];then
@@ -54,25 +54,25 @@ function setup_zsh_vim () {
   else
     cd ~/dotfiles && git pull
   fi
-  
+
   ln -s ~/dotfiles/.zshrc ~/.zshrc
   ln -s ~/dotfiles/.zprofile ~/.zprofile
   echo "zsh config finished"
-  
+
   echo 'autoload -Uz compinit' >> ~/.zshenv
-  
+
   # vimのインストール
   if [ -f /usr/bin/vim ];then
     echo "cool! vim is waiting you!"
   else
     echo "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
   fi
-  
+
   if [ -f ~/.vim/bundle ];then
     mkdir -p ~/.vim/bundle
     git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
   fi
-  
+
   # ~/.vimrcの設置
   ln -s ~/dotfiles/.vimrc ~/.vimrc
 }
@@ -87,7 +87,7 @@ function install_ruby_and_rails () {
     rbenv global $1
     rbenv rehash
   fi
-  
+
   gem install rails
 }
 
