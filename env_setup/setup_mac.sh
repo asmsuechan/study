@@ -17,6 +17,7 @@ function install_by_brew () {
   brew install dinghy
   brew install nginx
   brew install wget
+  brew install peco
 }
 
 function install_by_brew_cask () {
@@ -41,15 +42,13 @@ function install_by_brew_cask () {
 function setup_zsh_vim () {
   # zshのインストール、設定
   echo "installing zsh unless exist..."
-  if [[ $SHELL =~ (?!zsh)$ ]]; then
-    brew install --without-etcdir zsh
-    brew install zsh-completions
+  if [[ "$SHELL" =~ "zsh" ]]; then
     git clone https://github.com/b4b4r07/zplug ~/.zplug
   fi
 
   # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
   echo "putting zsh config files unless exist..."
-  if [ ! -f ~/dotfiles ];then
+  if [ -f ~/dotfiles ];then
     git clone https://github.com/asmsuechan/dotfiles.git ~/dotfiles
   else
     cd ~/dotfiles && git pull
@@ -81,9 +80,8 @@ function setup_zsh_vim () {
 }
 
 function install_ruby_and_rails () {
-  brew install rbenv
   # rbenvを使ってrubyのインストール
-  if echo `rbenv versions` | grep $1 ;then
+  if rbenv versions | grep $1;then
     echo "ruby is already installed"
   else
     rbenv install $1
@@ -92,6 +90,13 @@ function install_ruby_and_rails () {
   fi
 
   gem install rails
+}
+
+# brewは並行して実行できないので必要なものを先にインストールしておく
+function initialize_instlation () {
+  brew install rbenv
+  brew install --without-etcdir zsh
+  brew install zsh-completions
 }
 
 # brewのインストール
@@ -114,6 +119,8 @@ if [[ -f /Application/Boostnote.app ]];then
   rm $dmg_file
   echo "install finished"
 fi
+
+initialize_instlation
 
 install_by_brew &
 install_by_brew_cask &
