@@ -42,8 +42,10 @@ function install_by_brew_cask () {
 function setup_zsh_vim () {
   # zshのインストール、設定
   echo_blue "installing zsh unless exist..."
-  if [[ "$SHELL" =~ "zsh" ]]; then
-    git clone https://github.com/b4b4r07/zplug ~/.zplug
+  if command -v zplug;then
+    brew upgrade zplug
+  else
+    brew install zplug
   fi
 
   # 設定ファイルをasmsuechanのリポジトリからダウンロードして設置
