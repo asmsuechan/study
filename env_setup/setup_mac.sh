@@ -63,7 +63,7 @@ function setup_zsh_vim () {
   echo 'autoload -Uz compinit' >> ~/.zshenv
 
   # vimのインストール
-  if [ -f /usr/bin/vim ];then
+  if command -v vim > /dev/null;then
     echo_blue "cool! vim is waiting you!"
   else
     echo_blue "fuck! your PC doesn't have vim! fuck! fuck! fuck!"
@@ -105,7 +105,7 @@ function echo_blue {
 
 # brewのインストール
 # brewが存在しない場合のみインストール
-if [[ `type brew` =~ (?!found)$ ]]; then
+if ! command -v brew > /dev/null; then
   echo_blue "starting install brew"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   echo_blue "install finished!"
