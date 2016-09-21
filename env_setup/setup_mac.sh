@@ -18,6 +18,7 @@ function install_by_brew () {
   brew install nginx
   brew install wget
   brew install peco
+  brew install go
 }
 
 function install_by_brew_cask () {
