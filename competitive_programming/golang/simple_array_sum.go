@@ -1,10 +1,10 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "os"
-    "strconv"
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
@@ -19,16 +19,16 @@ var sc = bufio.NewScanner(os.Stdin)
 //}
 
 func main() {
-    sc.Scan()
-    x, e := strconv.Atoi(sc.Text())
-    if e != nil {
-      panic(e)
-    }
-    //sc.Split(bufio.ScanWords)
-    //n := nextInt()
-    //x := 0
-    //for i := 0; i < n; i++ {
-    //    x += nextInt()
-    //}
-    fmt.Println(x)
+	sc.Scan()
+	x, e := strconv.Atoi(sc.Text())
+	if e != nil {
+		panic(e)
+	}
+	//sc.Split(bufio.ScanWords)
+	//n := nextInt()
+	//x := 0
+	//for i := 0; i < n; i++ {
+	//    x += nextInt()
+	//}
+	fmt.Println(x)
 }
