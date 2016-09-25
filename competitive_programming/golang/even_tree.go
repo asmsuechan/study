@@ -82,27 +82,15 @@ func pop(a []int) ([]int, int) {
 
 func findVertices(a [][]int, n int) []int {
 	children := []int{}
-	children = append(children, findChildren(a, n)...)
 	unchecked := []int{}
-	leaf := findLeafs(a, n)
-
-	// first search
+	children = append(children, findChildren(a, n)...)
 	unchecked = append(unchecked, findChildren(a, n)...)
 	v := 0
-	unchecked, v = pop(unchecked)
-	findChildren(a, v)
-
-	//for _, child := range unchecked{
-
-	//}
-	//for _, child := range children {
-	//  if isContained(leaf, child) {
-	//    children = append(children, child)
-	//    break
-	//  } else {
-	//    children = append(children, findChildren(a, child)...)
-	//  }
-	//}
+	for len(unchecked) > 0 {
+		unchecked = append(unchecked, findChildren(a, v)...)
+		unchecked, v = pop(unchecked)
+		children = append(children, findChildren(a, v)...)
+	}
 	return children
 }
 
@@ -128,26 +116,24 @@ func main() {
 		//tree = append(tree[i], edge...)
 		tree[i] = edge
 	}
-	fmt.Println(n)
-	fmt.Println(tree)
-	//fmt.Println(findChildren(tree, 2))
-	//fmt.Println(findParent(tree, 2))
 	leaf := findLeafs(tree, n)
-	fmt.Println(leaf)
-	fmt.Println(isContained(leaf, 9))
-	fmt.Println(isContained(leaf, 10))
-
-	numberOfForests := 1
+	numberOfForests := 0
 	for i := len(leaf) - 1; i <= 0; i-- {
 		parent := findParent(tree, leaf[i])
-		for parent != 1 {
-			if (len(findChildren(tree, parent))+1)%2 == 0 {
-				numberOfForests++
-				break
-			} else {
+		//for parent != 1 {
+		//  if (len(findChildren(tree, parent))+1)%2 == 0 {
+		//    numberOfForests++
+		//    break
+		//  } else {
 
-			}
+		//  }
+		//}
+	}
+	ChildrenOf1 := findChildren(tree, 1)
+	for _, child := range ChildrenOf1 {
+		if len(findVertices(tree, child))%2 == 1 {
+			numberOfForests++
 		}
 	}
-	fmt.Println(findVertices(tree, 1))
+	fmt.Println(numberOfForests)
 }
