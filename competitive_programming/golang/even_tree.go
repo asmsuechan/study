@@ -86,8 +86,11 @@ func findVertices(a [][]int, n int) []int {
 	children = append(children, findChildren(a, n)...)
 	unchecked = append(unchecked, findChildren(a, n)...)
 	v := 0
-	for len(unchecked) > 0 {
+	for len(unchecked) >= 0 {
 		unchecked = append(unchecked, findChildren(a, v)...)
+		if len(unchecked) == 0 {
+			break
+		}
 		unchecked, v = pop(unchecked)
 		children = append(children, findChildren(a, v)...)
 	}
@@ -116,22 +119,9 @@ func main() {
 		//tree = append(tree[i], edge...)
 		tree[i] = edge
 	}
-	leaf := findLeafs(tree, n)
 	numberOfForests := 0
-	for i := len(leaf) - 1; i <= 0; i-- {
-		parent := findParent(tree, leaf[i])
-		//for parent != 1 {
-		//  if (len(findChildren(tree, parent))+1)%2 == 0 {
-		//    numberOfForests++
-		//    break
-		//  } else {
-
-		//  }
-		//}
-	}
-	ChildrenOf1 := findChildren(tree, 1)
-	for _, child := range ChildrenOf1 {
-		if len(findVertices(tree, child))%2 == 1 {
+	for i := 2; i < n; i++ {
+		if len(findVertices(tree, i))%2 == 1 {
 			numberOfForests++
 		}
 	}
