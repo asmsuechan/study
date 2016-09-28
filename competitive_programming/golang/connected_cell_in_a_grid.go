@@ -33,6 +33,25 @@ func printArray(a []int) {
 	fmt.Println("")
 }
 
+var numberOfCells int = 0
+
+func floodFill(a [][]int, i int, j int) {
+	if i >= 0 && j >= 0 && i < len(a) && j < len(a[i]) {
+		if a[i][j] == 1 {
+			a[i][j] = 2
+			numberOfCells++
+			floodFill(a, i+1, j)
+			floodFill(a, i-1, j)
+			floodFill(a, i, j+1)
+			floodFill(a, i, j-1)
+			floodFill(a, i+1, j+1)
+			floodFill(a, i+1, j-1)
+			floodFill(a, i-1, j-1)
+			floodFill(a, i-1, j+1)
+		}
+	}
+}
+
 func main() {
 	sc.Split(bufio.ScanWords)
 	n := nextInt()
@@ -41,7 +60,15 @@ func main() {
 	for i := 0; i < n; i++ {
 		matrix[i] = append(matrix[i], scanArray(m)...)
 	}
-	numberOfFilledCells := 0
-	fmt.Println(matrix)
-	fmt.Println(numberOfFilledCells)
+	max := 0
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			numberOfCells = 0
+			floodFill(matrix, i, j)
+			if max < numberOfCells {
+				max = numberOfCells
+			}
+		}
+	}
+	fmt.Println(max)
 }
