@@ -24,7 +24,7 @@ function install_by_brew () {
 function install_by_brew_cask () {
   # brew caskからアプリケーションのインストール
   # cask外からインストールして既存の場合は上書き禁止にしたい
-  brew cask update 
+  brew cask update
   brew cask install flux
   brew cask install iterm2
   #brew cask install vagrant
@@ -80,6 +80,10 @@ function setup_zsh_vim () {
   # ~/.vimrcの設置
   unlink ~/.vimrc
   ln -s ~/dotfiles/.vimrc ~/.vimrc
+
+  # ~/.gitconfigの設置
+  unlink ~/.gitconfig
+  ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 }
 
 function install_ruby_and_rails () {
