@@ -1,43 +1,24 @@
-# [Dockerを使う]
+# README
 
-## 必要なもの
-* docker
-* docker-compose
-* dinghy
-* virtualbox
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-virtualbox以外はbrewで入ります。
+Things you may want to cover:
 
-## docker
-dockerは仮想化技術の一つで、システムはホストOSを使いその上にコンテナを乗せていてプロセスを実行します。
+* Ruby version
 
-## docker-compose
-docker-composeは複数のコンテナをyamlで管理するツールです。
+* System dependencies
 
-特別なことはしておらずdocker run等で指定できるオプションをそのままyamlにしただけだが見通しよく管理することができ保守性が高いです。
+* Configuration
 
-例えばmysqlは以下のように書けます。
-```
-# mysql
-mysql:
-  image: mysql
-  volumes_from:
-    - data-mysql
-  ports:
-    - "3306:3306"
-  environment:
-    MYSQL_ROOT_PASSWORD: password
-```
+* Database creation
 
-`docker-compose run`を頻繁に使ってます。
-[ここ](http://qiita.com/taka4sato/items/f03004e449538b325b5e#docker-compose-run)が参考になります。
+* Database initialization
 
-**参考**
-http://qiita.com/y_hokkey/items/d51e69c6ff4015e85fce
+* How to run the test suite
 
-## dinghy
-docker-machineより高速にしたものです。
+* Services (job queues, cache servers, search engines, etc.)
 
-[この](http://qiita.com/masuidrive/items/d71ee1881fffb6ad098f)参考サイトによると18倍くらい早くなるみたいです。
+* Deployment instructions
 
-> VMWareで30秒、Virtualboxで90秒かかる中規模のRailsアプリの起動が5秒に短縮されます
+* ...
