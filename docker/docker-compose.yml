@@ -6,10 +6,7 @@ services:
       MYAPP_DATABASE_USERNAME: root
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: myapp_development
-    #volumes_from:
-    #  - storage
   nginx:
-    #image: nginx
     build: containers/nginx
     ports:
       - '8080:80'
@@ -20,10 +17,6 @@ services:
       - rails
     volumes:
       - .:/myapp
-      - /data
-      - /var/log/nginx/log
-      - /usr/share/nginx/html
-      - /share
   rails:
     build: .
     command: bundle exec unicorn -c config/unicorn.rb
@@ -39,19 +32,11 @@ services:
     depends_on:
       - db
   storage:
-    #build: containers/storage
-    image: busybox
+    build: containers/storage
     stdin_open: true
     tty: false
-    volumes:
-      - /data
-      - /data:/data
-      - .:/myapp
-      - /share
-      - /var/log
-      - /var/run
     command: /bin/sh
 
-#volumes:
-#  db-data:
-#    driver: local
+volumes:
+  db-data:
+    driver: local
