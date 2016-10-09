@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
-gem "mysql2"
-gem "unicorn"
+gem 'mysql2'
+gem 'unicorn'
+gem 'awesome_print'
+gem 'tapp-awesome_print'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
