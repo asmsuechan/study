@@ -13,14 +13,14 @@ services:
       - '80:80'
     volumes_from:
       - storage
-    links:
-      - rails
     volumes:
       - .:/myapp
   rails:
     build: .
     #command: bundle exec unicorn -c config/unicorn.rb
     command: bundle exec rails s unicorn
+    links:
+      - nginx
     volumes:
       - .:/myapp
       - /data
