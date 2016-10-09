@@ -19,7 +19,8 @@ services:
       - .:/myapp
   rails:
     build: .
-    command: bundle exec unicorn -c config/unicorn.rb
+    #command: bundle exec unicorn -c config/unicorn.rb
+    command: bundle exec rails s unicorn
     volumes:
       - .:/myapp
       - /data

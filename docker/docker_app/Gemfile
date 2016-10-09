@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'mysql2'
 gem 'unicorn'
+gem 'unicorn-rails'
 gem 'awesome_print'
 gem 'tapp-awesome_print'
 
