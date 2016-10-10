@@ -7,7 +7,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: myapp_development
   nginx:
-    build: containers/nginx
+    image: 674273823045.dkr.ecr.us-east-1.amazonaws.com/rdf_dev_nginx:latest
     ports:
       - '8080:80'
       - '80:80'
@@ -17,7 +17,6 @@ services:
       - .:/myapp
   rails:
     build: .
-    #command: bundle exec unicorn -c config/unicorn.rb
     command: bundle exec rails s unicorn
     links:
       - nginx
