@@ -32,9 +32,16 @@ services:
     depends_on:
       - db
   storage:
-    build: containers/storage
+    image: busybox
     stdin_open: true
     tty: false
+    volumes:
+      - /data
+      - /share
+      - /var/log/
+      - /var/run/
+      - /myapp
+      - .:/myapp
     command: /bin/sh
 
 volumes:
