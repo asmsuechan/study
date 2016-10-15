@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sample</title>
+</head>
+<body>
+  <canvas id="pdf-canvas"></canvas>
+  <button id="next">next</button>
+  <script type="text/javascript" src="app.js"></script>
+<!--
+<script type="text/javascript" src="pdf.js"></script>
+<script>
+  var currentPage = 1;
+  var pdfDoc;
+  var url = "https://www.nii.ac.jp/userdata/karuizawa/h23/111104_3rdlecueda.pdf";
+
+
+  PDFJS.getDocument(url).then(function(pdf){
+    pdfDoc = pdf;
+    renderPage(pdfDoc);
+  });
+
+  function renderPage(pdf){
+    pdf.getPage(currentPage).then(function(page){
+      var scale = 1.0;
+      var viewport = page.getViewport(scale);
+      var canvas = document.getElementById('pdf-canvas');
+      console.log(canvas)
+      var ctx = canvas.getContext('2d');
+      var renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      document.getElementById('pdf-canvas');
+      page.render(renderContext);
+    });
+  }
+
+  function nextPage(){
+    currentPage++;
+    renderPage(pdfDoc);
+  }
+
+  setInterval("nextPage()", 5000)
+  //document.getElementById("next").onclick = function() {
+  //  currentPage++;
+  //  renderPage(pdfDoc);
+  //}
+</script>
+-->
+</body>
+</html>
